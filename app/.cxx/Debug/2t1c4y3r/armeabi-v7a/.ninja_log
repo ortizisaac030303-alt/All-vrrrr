@@ -1,0 +1,4 @@
+# ninja log v5
+1	98	1781841585840484126	CMakeFiles/vroffsetlayer.dir/src/jni_controller_offset.cpp.o	9778720fc247be48
+0	275	1781841586017484126	CMakeFiles/vroffsetlayer.dir/src/controller_offset_layer.cpp.o	698b79b5e8ab5840
+276	445	1781841586177484126	/workspaces/All-vrrrr/app/build/intermediates/cxx/Debug/2t1c4y3r/obj/armeabi-v7a/libvroffsetlayer.so	6d6eb666b7c2ed6

@@ -22,19 +22,32 @@ public class OffsetService extends Service {
     private static float offsetZ = 0f;
     private static boolean fixedControllers = false;
 
+    public static float getOffsetX() { return offsetX; }
+    public static float getOffsetY() { return offsetY; }
+    public static float getOffsetZ() { return offsetZ; }
+    public static boolean isFixedControllers() { return fixedControllers; }
+
     @Override
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        try {
+            NativeVRLayer.initLayer();
+            LogHelper.append("Native VR layer initialized");
+        } catch (Exception e) {
+            LogHelper.append("Failed to initialize native layer: " + e.getMessage());
+        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null && ACTION_START_FOREGROUND.equals(intent.getAction())) {
             startForeground(NOTIFICATION_ID, buildNotification());
+            LogHelper.append("OffsetService started in foreground");
         } else if (intent != null && ACTION_STOP_FOREGROUND.equals(intent.getAction())) {
             stopForeground(true);
             stopSelf();
+            LogHelper.append("OffsetService stopped");
         }
         return START_STICKY;
     }
@@ -103,9 +116,21 @@ public class OffsetService extends Service {
                 offsetZ = value;
                 break;
         }
+        LogHelper.append(String.format("Offset set: %s=%.2f", axis, value));
+        syncNativeLayer();
     }
 
     public static void setFixedControllers(boolean enabled) {
         fixedControllers = enabled;
+        LogHelper.append("Fixed controllers set: " + (enabled ? "On" : "Off"));
+        syncNativeLayer();
+    }
+
+    private static void syncNativeLayer() {
+        try {
+            NativeVRLayer.setSynchronizedOffsets(offsetX, offsetY, offsetZ, fixedControllers);
+        } catch (Exception e) {
+            LogHelper.append("Failed to sync native layer: " + e.getMessage());
+        }
     }
 }

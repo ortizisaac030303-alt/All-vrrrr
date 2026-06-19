@@ -1,0 +1,27 @@
+{
+  "buildFiles": [
+    "/workspaces/All-vrrrr/app/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/codespace/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/workspaces/All-vrrrr/app/.cxx/Debug/2t1c4y3r/x86_64",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/codespace/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/workspaces/All-vrrrr/app/.cxx/Debug/2t1c4y3r/x86_64",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "vroffsetlayer::@6890427a1f51a3e7e1df": {
+      "artifactName": "vroffsetlayer",
+      "abi": "x86_64",
+      "output": "/workspaces/All-vrrrr/app/build/intermediates/cxx/Debug/2t1c4y3r/obj/x86_64/libvroffsetlayer.so",
+      "runtimeFiles": []
+    }
+  }
+}

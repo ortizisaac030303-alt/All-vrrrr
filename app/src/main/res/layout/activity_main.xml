@@ -63,4 +63,32 @@
         android:layout_height="wrap_content"
         android:text="Stop Offset Service"
         android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/saveLogButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Debug Log"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/shareLogButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Share Debug Log"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/checkUpdateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check for Update"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/testNativeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Native Layer"
+        android:layout_marginTop="8dp" />
 </LinearLayout>

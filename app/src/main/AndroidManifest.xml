@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -20,9 +21,31 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.vrcontrolleroffset.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <service
             android:name="com.example.vrcontrolleroffset.OffsetService"
             android:foregroundServiceType="connectedDevice"
             android:exported="false" />
+
+        <!-- OpenXR Layer Registration for VR Runtime Integration -->
+        <meta-data
+            android:name="com.khronos.openxr.api_version"
+            android:value="1" />
+
+        <uses-library
+            android:name="com.oculus.vrapi"
+            android:required="false" />
     </application>
+
+    <!-- VR Headtracking Feature Declaration -->
+    <uses-feature android:name="android.hardware.vr.headtracking" android:required="false" />
 </manifest>

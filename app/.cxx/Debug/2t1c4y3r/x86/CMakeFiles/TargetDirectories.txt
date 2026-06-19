@@ -1,0 +1,3 @@
+/workspaces/All-vrrrr/app/.cxx/Debug/2t1c4y3r/x86/CMakeFiles/vroffsetlayer.dir
+/workspaces/All-vrrrr/app/.cxx/Debug/2t1c4y3r/x86/CMakeFiles/edit_cache.dir
+/workspaces/All-vrrrr/app/.cxx/Debug/2t1c4y3r/x86/CMakeFiles/rebuild_cache.dir

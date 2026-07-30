@@ -4,8 +4,14 @@ public class NativeVRLayer {
     static {
         try {
             System.loadLibrary("vroffsetlayer");
+            LogHelper.append("SUCCESS: Native library vroffsetlayer loaded");
         } catch (UnsatisfiedLinkError e) {
-            android.util.Log.e("NativeVRLayer", "Failed to load vroffsetlayer: " + e.getMessage());
+            LogHelper.append("ERROR: Failed to load vroffsetlayer: " + e.toString());
+            LogHelper.append("Exception message: " + e.getMessage());
+            android.util.Log.e("NativeVRLayer", "Failed to load library", e);
+        } catch (Exception e) {
+            LogHelper.append("ERROR: Unexpected exception loading library: " + e.toString());
+            android.util.Log.e("NativeVRLayer", "Unexpected error", e);
         }
     }
 
@@ -21,7 +27,9 @@ public class NativeVRLayer {
             updateOffsets(x, y, z, x, y, z, fixed);
             LogHelper.append(String.format("Native layer updated: X=%.2f Y=%.2f Z=%.2f Fixed=%s", x, y, z, fixed ? "On" : "Off"));
         } catch (UnsatisfiedLinkError e) {
-            LogHelper.append("Native layer not available: " + e.getMessage());
+            LogHelper.append("Native layer not available (library not loaded): " + e.getMessage());
+        } catch (Exception e) {
+            LogHelper.append("Error calling native updateOffsets: " + e.getMessage());
         }
     }
 
@@ -37,6 +45,8 @@ public class NativeVRLayer {
             }
         } catch (UnsatisfiedLinkError e) {
             LogHelper.append("Failed to read native offsets: " + e.getMessage());
+        } catch (Exception e) {
+            LogHelper.append("Error calling native getOffsets: " + e.getMessage());
         }
         return null;
     }

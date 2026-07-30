@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 OffsetService.setFixedControllers(isChecked);
+                Toast.makeText(MainActivity.this,
+                        isChecked ? "Standalone Oculus controller offsets enabled" : "Standalone offsets disabled",
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

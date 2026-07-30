@@ -21,6 +21,7 @@ public class OffsetService extends Service {
     private static float offsetY = 0f;
     private static float offsetZ = 0f;
     private static boolean fixedControllers = false;
+    private static final ControllerOffsetState controllerOffsetState = new ControllerOffsetState();
 
     public static float getOffsetX() { return offsetX; }
     public static float getOffsetY() { return offsetY; }
@@ -116,12 +117,14 @@ public class OffsetService extends Service {
                 offsetZ = value;
                 break;
         }
+        controllerOffsetState.setOffsets(offsetX, offsetY, offsetZ);
         LogHelper.append(String.format("Offset set: %s=%.2f", axis, value));
         syncNativeLayer();
     }
 
     public static void setFixedControllers(boolean enabled) {
         fixedControllers = enabled;
+        controllerOffsetState.setStandaloneMode(enabled);
         LogHelper.append("Fixed controllers set: " + (enabled ? "On" : "Off"));
         syncNativeLayer();
     }
@@ -129,6 +132,8 @@ public class OffsetService extends Service {
     private static void syncNativeLayer() {
         try {
             NativeVRLayer.setSynchronizedOffsets(offsetX, offsetY, offsetZ, fixedControllers);
+            float[] pose = controllerOffsetState.applyPoseOffset(0f, 0f, 0f, true);
+            LogHelper.append(String.format("Standalone controller pose ready: X=%.2f Y=%.2f Z=%.2f", pose[0], pose[1], pose[2]));
         } catch (Exception e) {
             LogHelper.append("Failed to sync native layer: " + e.getMessage());
         }
